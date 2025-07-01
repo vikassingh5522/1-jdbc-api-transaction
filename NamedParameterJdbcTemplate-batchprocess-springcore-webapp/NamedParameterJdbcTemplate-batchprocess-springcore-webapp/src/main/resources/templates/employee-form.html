@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${formTitle}">Employee Form</title>
+    <link rel="stylesheet" th:href="@{/resources/css/style.css}">
+</head>
+<body>
+<h1 th:text="${formTitle}">Employee Form</h1>
+<div align="center">
+    <!-- Display success or error messages -->
+    <div th:if="${message}" class="alert success" th:text="${message}"></div>
+    <div th:if="${error}" class="alert error" th:text="${error}"></div>
+
+    <form th:action="@{/employee/save}" th:object="${employee}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+        <table border="0" cellpadding="10">
+            <tr>
+                <td>First Name:</td>
+                <td><input type="text" th:field="*{firstName}" required/></td>
+            </tr>
+            <tr>
+                <td>Last Name:</td>
+                <td><input type="text" th:field="*{lastName}" required/></td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td><input type="email" th:field="*{email}" required/></td>
+            </tr>
+            <tr>
+                <td>Department:</td>
+                <td><input type="text" th:field="*{department}" required/></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button type="submit" th:text="${employee.id} ? 'Update' : 'Add'">Save</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <a th:href="@{/}">Back to List</a>
+</div>
+</body>
+</html>

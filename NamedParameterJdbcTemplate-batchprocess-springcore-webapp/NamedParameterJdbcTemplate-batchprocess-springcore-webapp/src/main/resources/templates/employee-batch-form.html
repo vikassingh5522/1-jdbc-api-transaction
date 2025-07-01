@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${formTitle}">Add Batch Employees</title>
+    <link rel="stylesheet" th:href="@{/resources/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <h1 th:text="${formTitle}">Add Batch Employees</h1>
+    <p>Enter details for up to three employees. Fields marked with <span class="required">*</span> are recommended. At least one employee must have a first name to save.</p>
+
+    <!-- Display success or error messages -->
+    <div th:if="${message}" class="alert success" th:text="${message}"></div>
+    <div th:if="${error}" class="alert error" th:text="${error}"></div>
+
+    <form th:action="@{/employee/batchSave}" th:object="${batchForm}" method="post">
+        <div th:each="employee, iter : *{employees}" class="employee-section">
+            <h3>Employee <span th:text="${iter.count}"></span></h3>
+            <div class="form-group">
+                <label th:for="'firstName' + ${iter.index}">First Name <span class="required">*</span></label>
+                <input type="text" th:field="*{employees[__${iter.index}__].firstName}" th:id="'firstName' + ${iter.index}" placeholder="Enter first name" />
+            </div>
+            <div class="form-group">
+                <label th:for="'lastName' + ${iter.index}">Last Name</label>
+                <input type="text" th:field="*{employees[__${iter.index}__].lastName}" th:id="'lastName' + ${iter.index}" placeholder="Enter last name" />
+            </div>
+            <div class="form-group">
+                <label th:for="'email' + ${iter.index}">Email</label>
+                <input type="email" th:field="*{employees[__${iter.index}__].email}" th:id="'email' + ${iter.index}" placeholder="Enter email" />
+            </div>
+            <div class="form-group">
+                <label th:for="'department' + ${iter.index}">Department</label>
+                <input type="text" th:field="*{employees[__${iter.index}__].department}" th:id="'department' + ${iter.index}" placeholder="Enter department" />
+            </div>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save Batch</button>
+            <a th:href="@{/}" class="btn btn-secondary">Back to List</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title th:text="${formTitle}">Add Batch Employees</title>-->
+<!--    <link rel="stylesheet" th:href="@{/resources/css/style.css}">-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="container">-->
+<!--    <h1 th:text="${formTitle}">Add Batch Employees</h1>-->
+<!--    <p>Enter details for up to three employees. Fields marked with <span class="required">*</span> are recommended. At least one employee must have a first name to save.</p>-->
+
+<!--    &lt;!&ndash; Display success or error messages &ndash;&gt;-->
+<!--    <div th:if="${message}" class="alert success" th:text="${message}"></div>-->
+<!--    <div th:if="${error}" class="alert error" th:text="${error}"></div>-->
+
+<!--    <form th:action="@{/employee/batchSave}" method="post">-->
+<!--        <div th:each="employee, iter : ${employees}" class="employee-section">-->
+<!--            <h3>Employee <span th:text="${iter.count}"></span></h3>-->
+<!--            <div class="form-group">-->
+<!--                <label th:for="'firstName' + ${iter.index}">First Name <span class="required">*</span></label>-->
+<!--                <input type="text" th:field="*{employees[__${iter.index}__].firstName}" th:id="'firstName' + ${iter.index}" placeholder="Enter first name" />-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label th:for="'lastName' + ${iter.index}">Last Name</label>-->
+<!--                <input type="text" th:field="*{employees[__${iter.index}__].lastName}" th:id="'lastName' + ${iter.index}" placeholder="Enter last name" />-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label th:for="'email' + ${iter.index}">Email</label>-->
+<!--                <input type="email" th:field="*{employees[__${iter.index}__].email}" th:id="'email' + ${iter.index}" placeholder="Enter email" />-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label th:for="'department' + ${iter.index}">Department</label>-->
+<!--                <input type="text" th:field="*{employees[__${iter.index}__].department}" th:id="'department' + ${iter.index}" placeholder="Enter department" />-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="form-actions">-->
+<!--            <button type="submit" class="btn btn-primary">Save Batch</button>-->
+<!--            <a th:href="@{/}" class="btn btn-secondary">Back to List</a>-->
+<!--        </div>-->
+<!--    </form>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
