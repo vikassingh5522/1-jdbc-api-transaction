@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Account</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #ece9e6, #ffffff);
+            padding: 40px;
+            color: #333;
+        }
+
+        h2 {
+            color: #0077cc;
+        }
+
+        form {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border: 2px solid #0077cc;
+            border-radius: 10px;
+            width: 350px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 4px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #0077cc;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #005fa3;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 15px;
+            color: #0077cc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<h2>Create New Account</h2>
+<form th:action="@{/accounts/create}" method="post">
+    <label>Account ID:</label>
+    <input type="number" name="accountId" required>
+
+    <label>Balance:</label>
+    <input type="number" step="0.01" name="balance" required>
+
+    <button type="submit">Save</button>
+</form>
+<a th:href="@{/accounts}"> Back to Account List</a>
+</body>
+</html>
